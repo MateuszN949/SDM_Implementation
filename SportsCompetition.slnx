@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="SportsCompetition.Core/SportsCompetition.Core.csproj" />
+  <Project Path="SportsCompetition.Tests/SportsCompetition.Tests.csproj" />
+</Solution>
