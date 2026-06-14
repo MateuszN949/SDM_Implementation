@@ -38,7 +38,7 @@ public class FootballMatch : IMatch<FootballEvent, FootballScore, Team>
 
     public void AddEvent(FootballEvent matchEvent)
     {
-        if (!_state.CanAddEvent(matchEvent.EType))
+        if (!_state.CanAddEvent(matchEvent))
             throw new InvalidOperationException("Cannot add this event in current state.");
 
         matchEvent.Apply(_scores);

@@ -6,5 +6,5 @@ public sealed class CompletedState : IMatchState
 {
     public bool CanAddParticipant => false;
 
-    bool IMatchState.CanAddEvent(EventType eventType) => false;
+    bool IMatchState.CanAddEvent(object ev) => false;
 }

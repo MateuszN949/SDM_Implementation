@@ -5,8 +5,8 @@ namespace SportsCompetition.Core.States;
 public sealed class InProgressState : IMatchState
 {
     public bool CanAddParticipant => false;
-    public bool CanAddEvent(EventType eventType)
+    public bool CanAddEvent(object ev)
     {
-        return eventType == EventType.InProgressEvent;
+        return ev is IInProgressEvent;
     }
 }

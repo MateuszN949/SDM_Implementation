@@ -5,8 +5,8 @@ namespace SportsCompetition.Core.States;
 public sealed class TimeOverState : IMatchState
 {
     public bool CanAddParticipant => false;
-    public bool CanAddEvent(EventType eventType)
+    public bool CanAddEvent(object ev)
     {
-        return eventType == EventType.OvertimeEvent;
+        return ev is ITimeOverEvent;
     }
 }
