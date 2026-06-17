@@ -43,7 +43,12 @@ public class FootballMatch : IMatch<FootballEvent, FootballScore, Team>
     public void End()
     {
         if (_state is InProgressState || _state is TimeOverState)
+        {
             _state = new CompletedState();
+
+            if (!IsDraw() && _winner is null)
+                _winner = _scores.MaxBy(s => s.Value).Key;
+        }
     }
 
     public bool IsDraw()
@@ -97,6 +102,9 @@ public class FootballMatch : IMatch<FootballEvent, FootballScore, Team>
     {
         if (!_state.CanAddParticipant)
             throw new InvalidOperationException("Cannot add participant in current state.");
+
+        if (_participants.Count >= teamCount)
+            throw new InvalidOperationException("Football match needs at most two teams.");
 
         _participants.Add(participant);
 
