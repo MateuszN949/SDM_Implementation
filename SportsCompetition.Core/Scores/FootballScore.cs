@@ -27,14 +27,14 @@ public class FootballScore : IScore<FootballScore>
     {
         if (other is null) return 1;
 
-        if (goals > other.goals) return 1;
-        if (goals < other.goals) return -1;
-
-        if (redCards < other.redCards) return 1;
-        if (redCards > other.redCards) return -1;
-
-        if (yelCards < other.yelCards) return 1;
-        if (yelCards > other.yelCards) return -1;
+        foreach ((int, int) i in new List<(int, int)> {
+            (goals, other.goals),
+            (-redCards, -other.redCards),
+            (-yelCards, -other.yelCards)})
+        {
+            if (i.Item1 > i.Item2) return 1;
+            if (i.Item1 < i.Item2) return -1;
+        }
 
         return 0;
     }

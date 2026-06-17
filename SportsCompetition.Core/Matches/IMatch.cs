@@ -18,9 +18,13 @@ public interface IMatch<TEvent, TScore, TParty>
 
     public IMatchState State { get; }
 
+    TParty? Winner { get; }
+
     void AddParticipant(TParty participant);
 
     void AddEvent(TEvent matchEvent);
+
+    void CancelEvent(TEvent matchEvent);
 
     void Start();
 
