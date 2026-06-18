@@ -132,4 +132,40 @@ public class EventTests
 
         Assert.Equal(goalsBefore - 1, goalsAfter);
     }
+
+    [Fact]
+    public void GoldenGoalEvent_Sets_Winner()
+    {
+        Team a = new("A", []);
+        Team b = new("B", []);
+
+        FootballMatch match = new();
+        match.AddParticipant(a);
+        match.AddParticipant(b);
+
+        match.Start();
+        match.TimeOver();
+        match.AddEvent(new GoldenGoalEvent(a));
+        match.End();
+
+        Assert.Equal(a, match.Winner);
+    }
+
+    [Fact]
+    public void PenaltyShootoutEvent_Sets_Winner()
+    {
+        Team a = new("A", []);
+        Team b = new("B", []);
+
+        FootballMatch match = new();
+        match.AddParticipant(a);
+        match.AddParticipant(b);
+
+        match.Start();
+        match.TimeOver();
+        match.AddEvent(new PenaltyShootoutEvent(a, 5, b, 3));
+        match.End();
+
+        Assert.Equal(a, match.Winner);
+    }
 }
