@@ -5,28 +5,21 @@ namespace SportsCompetition.Core.Tournament;
 
 public class Tournament<TParty> where TParty : IParty
 {
-    private readonly List<IStage<TParty>> _stages = [];
+    private readonly TournamentController<TParty> _controller = new();
 
-    public IReadOnlyList<IStage<TParty>> Stages => _stages;
+    public IReadOnlyList<IStage<TParty>> Stages => _controller.Stages;
 
     public void AddStage(IStage<TParty> stage)
     {
-        _stages.Add(stage);
+        _controller.AddStage(stage);
     }
 
-    public IStage<TParty> CurrentStage
-    {
-        get
-        {
-            if (_stages.Count == 0)
-                throw new InvalidOperationException("Tournament contains no stages.");
+    public IStage<TParty> CurrentStage => _controller.CurrentStage;
 
-            return _stages.Last();
-        }
-    }
+    public IReadOnlyList<TParty> GetRanking() => _controller.GetRanking();
 
-    public IReadOnlyList<TParty> GetRanking()
+    public bool Advance()
     {
-        return CurrentStage.GetRanking();
+        return _controller.Advance();
     }
 }
